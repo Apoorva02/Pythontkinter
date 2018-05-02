@@ -1,4 +1,4 @@
-from tkinter import*
+from tkinter import *
 import os
 
 w=Tk("myproject")
@@ -99,11 +99,10 @@ def firstrec():
 def deleterecord():
     with open("pythondatabase.txt",'r') as f:
          d=f.readlines()
-    
     new = []
     for line in d:
-         data = line.strip().split()
-         if len(data)!=0 and data[2] != bookid.get(): new.append(line)
+         data = line.strip().split(',')
+         if len(data)!=0 and data[0] != bookid.get(): new.append(line)
     with open("pythondatabase.txt",'w') as fp:
        for line in new:   
              fp.write(line)
@@ -151,20 +150,16 @@ def update():
     x5=year.get()
     x6=price.get()
     with open("pythondatabase.txt",'r') as f:
-              d=f.readlines()
-              
-    new=[]
+         d=f.readlines()
+    new = []
     for line in d:
-              data=line.strip().split()
-              if len(data)!=0 and data[2]!=c3: new.append(line)
-              else:
-                  new.append(str(x1)+' '+str(x2)+' '+str(x3)+' '+str(x4)+' '+str(x5)+''+str(x6)+"\n")
+         data = line.strip().split(',')
+         if len(data)!=0 and data[0] != bookid.get(): new.append(line)
+         else: new.append(str(x1)+','+str(x2)+','+str(x3)+','+str(x4)+','+str(x5)+','+str(x6)+"\n")
     with open("pythondatabase.txt",'w') as fp:
-              for line in new:
-                  fp.write(line)
+       for line in new:   
+             fp.write(line)
             
-   
-    
     
 b1=Button(w,text="First record",command=firstrec)
 b2=Button(w,text="Previous",command=prevrec)
